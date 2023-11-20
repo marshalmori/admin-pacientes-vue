@@ -1,5 +1,11 @@
 <script>
-export default {};
+import { ref } from "vue";
+
+const nombre = ref("");
+
+const leerNombre = (e) => {
+  nombre.value = e.target.value;
+};
 </script>
 
 <template>
@@ -20,6 +26,8 @@ export default {};
           type="text"
           placeholder="Nombre de la mascota"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          :value="nombre"
+          @input="leerNombre"
         />
       </div>
 
