@@ -22,6 +22,60 @@ export default {};
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
         />
       </div>
+
+      <div class="mb-5">
+        <label
+          for="proprietario"
+          class="block text-gray-700 uppercase font-bold"
+          >Nombre Proprietario</label
+        >
+        <input
+          id="proprietario"
+          type="text"
+          placeholder="Nombre del proprietario"
+          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+        />
+      </div>
+
+      <div class="mb-5">
+        <label for="email" class="block text-gray-700 uppercase font-bold"
+          >Email</label
+        >
+        <input
+          id="email"
+          type="email"
+          placeholder="Email del proprietario"
+          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+        />
+      </div>
+
+      <div class="mb-5">
+        <label for="alta" class="block text-gray-700 uppercase font-bold"
+          >Alta</label
+        >
+        <input
+          id="alta"
+          type="date"
+          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+        />
+      </div>
+
+      <div class="mb-5">
+        <label for="sintomas" class="block text-gray-700 uppercase font-bold"
+          >Síntomas</label
+        >
+        <input
+          id="sintomas"
+          placeholder="Describe los síntomas"
+          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md h-40"
+        />
+      </div>
+
+      <input
+        type="submit"
+        class="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
+        value="Registrar paciente"
+      />
     </form>
   </div>
 </template>
