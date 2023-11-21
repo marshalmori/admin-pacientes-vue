@@ -1,5 +1,11 @@
 <script setup>
 import { reactive } from "vue";
+import Alerta from "./Alerta.vue";
+
+const alerta = reactive({
+  tipo: "",
+  mensaje: "",
+});
 
 const paciente = reactive({
   nombre: "",
@@ -9,7 +15,13 @@ const paciente = reactive({
   sintomas: "",
 });
 
-const validar = (e) => {};
+const validar = () => {
+  if (Object.values(paciente).includes("")) {
+    alerta.mensaje = "Todos los campos son obligatorios";
+    alerta.tipo = "error";
+    return;
+  }
+};
 </script>
 
 <template>
@@ -19,6 +31,8 @@ const validar = (e) => {};
       Añade Pacientes y
       <span class="text-indigo-600 font-bold">Administralos</span>
     </p>
+
+    <Alerta v-if="alerta.mensaje" :alerta="alerta" />
 
     <form
       @submit.prevent="validar"
