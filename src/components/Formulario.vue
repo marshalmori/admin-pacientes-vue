@@ -8,6 +8,8 @@ const paciente = reactive({
   alta: "",
   sintomas: "",
 });
+
+const validar = (e) => {};
 </script>
 
 <template>
@@ -18,7 +20,10 @@ const paciente = reactive({
       <span class="text-indigo-600 font-bold">Administralos</span>
     </p>
 
-    <form class="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+    <form
+      @submit.prevent="validar"
+      class="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
+    >
       <div class="mb-5">
         <label for="mascota" class="block text-gray-700 uppercase font-bold"
           >Nombre Mascota</label
