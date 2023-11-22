@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, watch, onMounted } from "vue";
 import { uid } from "uid";
 
 import Header from "./components/Header.vue";
@@ -17,12 +17,31 @@ const paciente = reactive({
   sintomas: "",
 });
 
+watch(
+  pacientes,
+  () => {
+    guardarLocalStorage();
+  },
+  {
+    deep: true,
+  }
+);
+
+const guardarLocalStorage = () => {
+  localStorage.setItem("pacientes", JSON.stringify(pacientes.value));
+};
+
+onMounted(() => {
+  const pacientesStorage = localStorage.getItem("pacientes");
+  if (pacientesStorage) {
+    pacientes.value = JSON.parse(pacientesStorage);
+  }
+});
+
 const guardarPaciente = () => {
   if (paciente.id) {
     const { id } = paciente;
-    const i = pacientes.value.findIndex(
-      (pacienteState) => pacienteState.id === id
-    );
+    const i = pacientes.value.findIndex((paciente) => paciente.id === id);
     pacientes.value[i] = { ...paciente };
   } else {
     pacientes.value.push({ ...paciente, id: uid() });
@@ -35,6 +54,7 @@ const guardarPaciente = () => {
     email: "",
     alta: "",
     sintomas: "",
+    id: null,
   });
 };
 
@@ -43,6 +63,10 @@ const actualizarPaciente = (id) => {
     (paciente) => paciente.id === id
   )[0];
   Object.assign(paciente, pacienteEditar);
+};
+
+const eliminarPaciente = (id) => {
+  pacientes.value = pacientes.value.filter((paciente) => paciente.id !== id);
 };
 </script>
 
@@ -58,6 +82,7 @@ const actualizarPaciente = (id) => {
         v-model:alta="paciente.alta"
         v-model:sintomas="paciente.sintomas"
         @guardar-paciente="guardarPaciente"
+        :id="paciente.id"
       />
 
       <div class="md:w-1/2 md:h-screen overflow-y-scroll mt-10">
@@ -74,6 +99,7 @@ const actualizarPaciente = (id) => {
             v-for="paciente in pacientes"
             :paciente="paciente"
             @actualizar-paciente="actualizarPaciente"
+            @eliminar-paciente="eliminarPaciente"
           />
         </div>
         <p v-else class="text-lg mt-5 text-center mb-10">No Hay pacientes</p>
